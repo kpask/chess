@@ -1,0 +1,67 @@
+.board-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("https://images.wallpaperscraft.com/image/single/garden_trees_lawn_148789_1600x900.jpg");
+    background-size: cover;     /* scale to fill screen */
+    background-position: center;/* center the image */
+    background-repeat: no-repeat;
+    background-color: #cccccc;  /* fallback if image fails */
+  }
+  
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: min(90vw, 90vh);
+    height: min(90vw, 90vh);
+  }
+  
+  .square.white { background-color: #eee; }
+  .square.black { background-color: #555; }
+  
+  .overlay {
+    position: absolute;      /* overlay above the board */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* gray-out effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .menu {
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .background{
+    background-color: black;
+  }
+
+  button{
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: salmon;
+    color: white;
+  }
