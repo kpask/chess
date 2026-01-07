@@ -1,68 +1,121 @@
-.board-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* full viewport height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  body {
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
-    background-image: url("https://images.wallpaperscraft.com/image/single/garden_trees_lawn_148789_1600x900.jpg");
-    background-size: cover;     /* scale to fill screen */
-    background-position: center;/* center the image */
-    background-repeat: no-repeat;
-    background-color: #cccccc;  /* fallback if image fails */
-  }
-  
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-  .board {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    width: min(90vw, 90vh);
-    height: min(90vw, 90vh);
-  }
-  
-  .square.white { background-color: #eee; }
-  .square.black { background-color: #555; }
-  
-  .overlay {
-    position: absolute;      /* overlay above the board */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* gray-out effect */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .menu {
-    background-color: #fff;
-    padding: 30px 50px;
-    border-radius: 10px;
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://images.wallpaperscraft.com/image/single/garden_trees_lawn_148789_1600x900.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.board-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* New Header Row */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 25px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  min-width: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.header-item { display: flex; flex-direction: column; align-items: center; }
+.header-label { font-size: 10px; text-transform: uppercase; opacity: 0.6; letter-spacing: 1px; }
+.header-value { font-weight: 700; font-size: 16px; }
+
+.turn-pill {
+  background: salmon;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: min(80vw, 80vh);
+  height: min(80vw, 80vh);
+  border: 5px solid rgba(0,0,0,0.3);
+}
+
+.square { position: relative; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+.square.white { background-color: #f0d9b5; }
+.square.black { background-color: #b58863; }
+
+/* Right click highlight */
+.square.highlight-red::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 0, 0, 0.4);
+}
+
+.square.selected::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 0, 0.3);
+}
+
+.piece { width: 90%; height: 90%; pointer-events: none; z-index: 2; }
+.move-dot { width: 25%; height: 25%; background: rgba(0,0,0,0.2); border-radius: 50%; position: absolute; z-index: 1; }
+
+button {
+  padding: 12px 24px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: salmon;
+  color: white;
+  transition: transform 0.1s;
+}
+button:active { transform: scale(0.95); }
+
+.timer-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    min-width: 80px;
   }
   
-  .piece {
-    width: 90%;
-    height: 90%;
+  .timer-value {
+    font-family: 'Courier New', Courier, monospace; /* Digital look */
+    font-size: 20px;
+    font-weight: bold;
   }
   
-  button{
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: salmon;
-    color: white;
+  .timer-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  
+  /* Red glow when time is below 30 seconds */
+  .timer-low {
+    color: #ff4444;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
   }
